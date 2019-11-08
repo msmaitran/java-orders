@@ -1,11 +1,7 @@
 package com.lambdaschool.javaorders.services;
 
-import com.lambdaschool.javaorders.models.Agent;
-import com.lambdaschool.javaorders.models.Customer;
-import com.lambdaschool.javaorders.models.Order;
-
-import java.util.List;
+import com.lambdaschool.javaorders.models.Agents;
 
 public interface AgentService {
-    Agent findAgentById(long id);
+    Agents findAgentById(long id);
 }

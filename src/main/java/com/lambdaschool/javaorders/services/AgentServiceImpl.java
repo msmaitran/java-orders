@@ -1,6 +1,6 @@
 package com.lambdaschool.javaorders.services;
 
-import com.lambdaschool.javaorders.models.Agent;
+import com.lambdaschool.javaorders.models.Agents;
 import com.lambdaschool.javaorders.repositories.AgentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class AgentServiceImpl implements AgentService {
     private AgentRepository agentrepo;
 
     @Override
-    public Agent findAgentById(long id) {
+    public Agents findAgentById(long id) {
         return agentrepo.findById(id).orElseThrow(() ->
                 new EntityNotFoundException(Long.toString(id)));
     }

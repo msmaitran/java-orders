@@ -8,8 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "customers")
-public class Customer {
-
+public class Customers {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
@@ -30,20 +29,16 @@ public class Customer {
 
     @ManyToOne
     @JoinColumn(name = "agentcode",
-                nullable = false)
+            nullable = false)
+    private Agents agents;
+
+    @OneToMany(mappedBy = "customers", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("customers")
-    private Agent agent;
+    private List<Orders> orders = new ArrayList<>();
+    
+    public Customers(){}
 
-    @OneToMany(mappedBy = "customer",
-                cascade = CascadeType.ALL,
-                orphanRemoval = true)
-    @JsonIgnoreProperties("customer")
-    private List<Order> orders = new ArrayList<>();
-
-    public Customer() {
-    }
-
-    public Customer(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone, Agent agent) {
+    public Customers(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone) {
         this.custname = custname;
         this.custcity = custcity;
         this.workingarea = workingarea;
@@ -54,7 +49,6 @@ public class Customer {
         this.paymentamt = paymentamt;
         this.outstandingamt = outstandingamt;
         this.phone = phone;
-        this.agent = agent;
     }
 
     public long getCustcode() {
@@ -145,11 +139,19 @@ public class Customer {
         this.phone = phone;
     }
 
-    public Agent getAgent() {
-        return agent;
+    public Agents getAgents() {
+        return agents;
     }
 
-    public void setAgent(Agent agent) {
-        this.agent = agent;
+    public void setAgents(Agents agents) {
+        this.agents = agents;
+    }
+
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-public class Order {
+public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,23 +19,26 @@ public class Order {
     private double advanceamount;
     private String orderdescription;
 
-    @ManyToOne
-    @JoinColumn(name = "custcode")
-    @JsonIgnoreProperties({"agent", "orders"})
-    private Customer customer;
+    public Orders(){}
 
-    @ManyToMany(mappedBy = "orders")
-    private List<Payment> payments = new ArrayList<>();
-
-    public Order() {
-    }
-
-    public Order(double ordamount, double advanceamount, String orderdescription, Customer customer) {
+    public Orders(double ordamount, double advanceamount, String orderdescription) {
         this.ordamount = ordamount;
         this.advanceamount = advanceamount;
         this.orderdescription = orderdescription;
-        this.customer = customer;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "custcode",
+                nullable = false)
+    private Customers customers;
+
+    @ManyToMany
+    @JoinTable(name = "orderspayments",
+                joinColumns = @JoinColumn(name = "ordnum"),
+                inverseJoinColumns = @JoinColumn(name = "paymentid")
+    )
+    @JsonIgnoreProperties("orders")
+    List<Payments> payments = new ArrayList<>();
 
     public long getOrdnum() {
         return ordnum;
@@ -69,11 +72,11 @@ public class Order {
         this.orderdescription = orderdescription;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public List<Payments> getPayments() {
+        return payments;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setPayments(List<Payments> payments) {
+        this.payments = payments;
     }
 }

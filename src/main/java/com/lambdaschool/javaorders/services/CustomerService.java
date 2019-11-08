@@ -1,14 +1,14 @@
 package com.lambdaschool.javaorders.services;
 
-import com.lambdaschool.javaorders.models.Customer;
+import com.lambdaschool.javaorders.models.Customers;
 
 import java.util.List;
 
 public interface CustomerService {
 
-    List<Customer> findAllCustomers();
+    List<Customers> findAllCustomers();
 
-    Customer findCustomerById(long id);
+    Customers findCustomerById(long id);
 
-    List<Customer> findCustomerByNameLike(String thename);
+    List<Customers> findCustomerByNameLike(String thename);
 }

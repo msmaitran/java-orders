@@ -1,6 +1,6 @@
 package com.lambdaschool.javaorders.services;
 
-import com.lambdaschool.javaorders.models.Customer;
+import com.lambdaschool.javaorders.models.Customers;
 import com.lambdaschool.javaorders.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,20 +16,20 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepo;
 
     @Override
-    public List<Customer> findAllCustomers() {
-        List<Customer> list = new ArrayList<>();
+    public List<Customers> findAllCustomers() {
+        List<Customers> list = new ArrayList<>();
         customerRepo.findAll().iterator().forEachRemaining(list::add);
         return list;
     }
 
     @Override
-    public Customer findCustomerById(long id) {
+    public Customers findCustomerById(long id) {
         return customerRepo.findById(id).orElseThrow(() ->
                 new EntityNotFoundException(Long.toString(id)));
     }
 
     @Override
-    public List<Customer> findCustomerByNameLike(String thename) {
+    public List<Customers> findCustomerByNameLike(String thename) {
         return customerRepo.findByCustnameContainingIgnoringCase(thename);
     }
 }

@@ -1,7 +1,7 @@
 package com.lambdaschool.javaorders.services;
 
-import com.lambdaschool.javaorders.models.Order;
+import com.lambdaschool.javaorders.models.Orders;
 
 public interface OrderService {
-    Order findOrderById(long id);
+    Orders findOrderById(long id);
 }
